@@ -2,9 +2,9 @@ using TreasuryTransfers.Infrastructure.Repositories;
 
 namespace TreasuryTransfers.Tests.Repositories;
 
-public class AccountsRepositoryTests
+public class AccountRepositoryTests
 {
-    private readonly AccountsRepository _sut = new();
+    private readonly AccountRepository _sut = new();
 
     [Theory]
     [InlineData("ACC-USD-1")]

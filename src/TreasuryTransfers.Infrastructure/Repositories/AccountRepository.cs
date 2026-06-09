@@ -5,7 +5,7 @@ using TreasuryTransfers.Domain.ValueObjects;
 
 namespace TreasuryTransfers.Infrastructure.Repositories;
 
-public class AccountsRepository : IRepository<Account>
+public class AccountRepository : IRepository<Account>
 {
     private readonly IList<Account> _accounts = new List<Account>
     {
