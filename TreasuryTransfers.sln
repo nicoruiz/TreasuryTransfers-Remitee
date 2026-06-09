@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CE753EF8-84F2-42A0-B4B1-F91BD0066D6A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreasuryTransfers.Domain", "src\TreasuryTransfers.Domain\TreasuryTransfers.Domain.csproj", "{8C0A7E43-32A5-4B64-83B3-48A6E04E3848}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreasuryTransfers.Application", "src\TreasuryTransfers.Application\TreasuryTransfers.Application.csproj", "{7FA52AB8-50CC-47CE-A4D3-39A10BA0DC8C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreasuryTransfers.Infrastructure", "src\TreasuryTransfers.Infrastructure\TreasuryTransfers.Infrastructure.csproj", "{67E6D083-5342-4B84-8DA8-C53C9B1F5C6C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreasuryTransfers.Api", "src\TreasuryTransfers.Api\TreasuryTransfers.Api.csproj", "{51670CEA-1A8E-47EC-B1DD-47BF959208E2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{77BC92A5-8D72-4EF2-85A1-C54C84793DEA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreasuryTransfers.Tests", "tests\TreasuryTransfers.Tests\TreasuryTransfers.Tests.csproj", "{B6C05A18-1AD7-44CD-AAAA-9325D00781E3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8C0A7E43-32A5-4B64-83B3-48A6E04E3848}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C0A7E43-32A5-4B64-83B3-48A6E04E3848}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C0A7E43-32A5-4B64-83B3-48A6E04E3848}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C0A7E43-32A5-4B64-83B3-48A6E04E3848}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FA52AB8-50CC-47CE-A4D3-39A10BA0DC8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FA52AB8-50CC-47CE-A4D3-39A10BA0DC8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FA52AB8-50CC-47CE-A4D3-39A10BA0DC8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FA52AB8-50CC-47CE-A4D3-39A10BA0DC8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67E6D083-5342-4B84-8DA8-C53C9B1F5C6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67E6D083-5342-4B84-8DA8-C53C9B1F5C6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67E6D083-5342-4B84-8DA8-C53C9B1F5C6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67E6D083-5342-4B84-8DA8-C53C9B1F5C6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51670CEA-1A8E-47EC-B1DD-47BF959208E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51670CEA-1A8E-47EC-B1DD-47BF959208E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51670CEA-1A8E-47EC-B1DD-47BF959208E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51670CEA-1A8E-47EC-B1DD-47BF959208E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6C05A18-1AD7-44CD-AAAA-9325D00781E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6C05A18-1AD7-44CD-AAAA-9325D00781E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6C05A18-1AD7-44CD-AAAA-9325D00781E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6C05A18-1AD7-44CD-AAAA-9325D00781E3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8C0A7E43-32A5-4B64-83B3-48A6E04E3848} = {CE753EF8-84F2-42A0-B4B1-F91BD0066D6A}
+		{7FA52AB8-50CC-47CE-A4D3-39A10BA0DC8C} = {CE753EF8-84F2-42A0-B4B1-F91BD0066D6A}
+		{67E6D083-5342-4B84-8DA8-C53C9B1F5C6C} = {CE753EF8-84F2-42A0-B4B1-F91BD0066D6A}
+		{51670CEA-1A8E-47EC-B1DD-47BF959208E2} = {CE753EF8-84F2-42A0-B4B1-F91BD0066D6A}
+		{B6C05A18-1AD7-44CD-AAAA-9325D00781E3} = {77BC92A5-8D72-4EF2-85A1-C54C84793DEA}
+	EndGlobalSection
+EndGlobal
