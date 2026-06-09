@@ -4,5 +4,8 @@ namespace TreasuryTransfers.Application.Interfaces.Services;
 
 public interface ILedgerTransactionService
 {
-    Task<TransferResponse> TransferAsync(TransferRequest request);
+    Task<TransferResult> TransferAsync(TransferRequest request);
+    Task<IReadOnlyList<TransferResponse>> GetAllAsync();
 }
+
+public record TransferResult(TransferResponse Response, bool IsNew);

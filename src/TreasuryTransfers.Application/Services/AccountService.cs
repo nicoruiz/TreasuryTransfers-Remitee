@@ -1,5 +1,7 @@
+using TreasuryTransfers.Application.DTOs;
 using TreasuryTransfers.Application.Interfaces.Repositories;
 using TreasuryTransfers.Application.Interfaces.Services;
+using TreasuryTransfers.Application.Mappings;
 using TreasuryTransfers.Domain.Entities;
 using TreasuryTransfers.Domain.Exceptions;
 
@@ -24,9 +26,16 @@ public class AccountService : IAccountService
         return account;
     }
 
+    public async Task<IReadOnlyList<AccountResponse>> GetAllAsync()
+    {
+        var accounts = await _accountRepository.GetAllAsync();
+        return accounts.Select(a => a.ToResponse()).ToList().AsReadOnly();
+    }
+
     public void DebitCredit(Account source, Account target, decimal amount, decimal fx)
     {
+        var credited = target.Currency.Round(amount * fx);
         source.Balance -= amount;
-        target.Balance += amount * fx;
+        target.Balance += credited;
     }
 }

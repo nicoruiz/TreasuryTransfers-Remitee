@@ -11,11 +11,14 @@ public static class TransferValidator
     public static void Validate(TransferRequest request, Account sourceAccount, Account targetAccount)
     {
         ValidateAmount(request.Amount);
+        ValidateSupportedCurrency(request.Currency);
+        ValidateDifferentAccountIds(request.SourceAccountId, request.TargetAccountId);
+        ValidateCurrency(request, sourceAccount);
         ValidateAmountDecimals(sourceAccount.Currency, request.Amount);
-        ValidateDifferentAccounts(sourceAccount, targetAccount);
         ValidateAccountStatus(sourceAccount);
         ValidateAccountStatus(targetAccount);
         ValidateSufficientBalance(sourceAccount, request.Amount);
+        ValidateFx(request, sourceAccount, targetAccount);
     }
 
     public static void ValidateAmount(decimal amount)
@@ -24,9 +27,27 @@ public static class TransferValidator
             throw new ValidationException("Transfer amount must be greater than zero.");
     }
 
-    public static void ValidateDifferentAccounts(Account source, Account target)
+    public static void ValidateCurrency(TransferRequest request, Account sourceAccount)
     {
-        if (source.Id == target.Id)
+        if (!string.Equals(request.Currency, sourceAccount.Currency.Code, StringComparison.OrdinalIgnoreCase))
+            throw new ValidationException($"Request currency '{request.Currency}' does not match source account currency '{sourceAccount.Currency.Code}'.");
+    }
+
+    public static void ValidateSupportedCurrency(string currency)
+    {
+        try
+        {
+            Currency.FromCode(currency);
+        }
+        catch (ArgumentException)
+        {
+            throw new ValidationException($"Unsupported currency: '{currency}'.");
+        }
+    }
+
+    public static void ValidateDifferentAccountIds(string sourceAccountId, string targetAccountId)
+    {
+        if (sourceAccountId == targetAccountId)
             throw new ValidationException("Source and target accounts must be different.");
     }
 

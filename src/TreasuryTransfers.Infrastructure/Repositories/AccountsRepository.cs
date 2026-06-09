@@ -22,4 +22,9 @@ public class AccountsRepository : IRepository<Account>
 
         return Task.FromResult(account);
     }
+
+    public Task<IReadOnlyList<Account>> GetAllAsync()
+    {
+        return Task.FromResult<IReadOnlyList<Account>>(_accounts.ToList().AsReadOnly());
+    }
 }

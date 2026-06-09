@@ -21,21 +21,19 @@ public class LedgerTransactionService : ILedgerTransactionService
         _accountService = accountService;
     }
 
-    public async Task<TransferResponse> TransferAsync(TransferRequest request)
+    public async Task<TransferResult> TransferAsync(TransferRequest request)
     {
-        // Step 1: Check for existing transaction
-        var existingTransaction = await _ledgerTransactionRepository.GetByOperationIdAsync(request.OperationId);
-
-        // If a transaction with the same OperationId exists, return its response to ensure idempotency
-        if (existingTransaction != null)
-            return existingTransaction.ToResponse();
-
-        // Step 2: Get accounts
+        // Step 1: Get accounts
         var sourceAccount = await _accountService.GetByIdOrThrowAsync(request.SourceAccountId);
         var targetAccount = await _accountService.GetByIdOrThrowAsync(request.TargetAccountId);
 
-        // Step 3: Validate
+        // Step 2: Validate
         TransferValidator.Validate(request, sourceAccount, targetAccount);
+
+        // Step 3: Check for existing transaction (idempotency)
+        var existingTransaction = await _ledgerTransactionRepository.GetByOperationIdAsync(request.OperationId);
+        if (existingTransaction != null)
+            return new TransferResult(existingTransaction.ToResponse(), IsNew: false);
 
         // Step 4: Debit/Credit with rollback on failure
         var fx = request.Fx ?? 1m;
@@ -47,6 +45,7 @@ public class LedgerTransactionService : ILedgerTransactionService
             _accountService.DebitCredit(sourceAccount, targetAccount, request.Amount, fx);
 
             // Step 5: Create a new LedgerTransaction
+            var amountCredited = targetAccount.Currency.Round(request.Amount * fx);
             var newTransaction = new LedgerTransaction
             {
                 OperationId = request.OperationId,
@@ -54,14 +53,14 @@ public class LedgerTransactionService : ILedgerTransactionService
                 SourceAccountId = request.SourceAccountId,
                 TargetAccountId = request.TargetAccountId,
                 AmountDebited = request.Amount,
-                AmountCredited = request.Amount * fx,
+                AmountCredited = amountCredited,
                 CreatedAt = DateTime.UtcNow
             };
 
             await _ledgerTransactionRepository.AddAsync(newTransaction);
             await _ledgerTransactionRepository.SaveChangesAsync();
 
-            return newTransaction.ToResponse();
+            return new TransferResult(newTransaction.ToResponse(), IsNew: true);
         }
         catch // If something fails, we rollback the account balances to maintain consistency
         {
@@ -69,5 +68,11 @@ public class LedgerTransactionService : ILedgerTransactionService
             targetAccount.Balance = originalTargetBalance;
             throw;
         }
+    }
+
+    public async Task<IReadOnlyList<TransferResponse>> GetAllAsync()
+    {
+        var transactions = await _ledgerTransactionRepository.GetAllAsync();
+        return transactions.Select(t => t.ToResponse()).ToList().AsReadOnly();
     }
 }

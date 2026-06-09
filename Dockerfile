@@ -8,6 +8,7 @@ COPY src/TreasuryTransfers.Domain/TreasuryTransfers.Domain.csproj src/TreasuryTr
 COPY src/TreasuryTransfers.Application/TreasuryTransfers.Application.csproj src/TreasuryTransfers.Application/
 COPY src/TreasuryTransfers.Infrastructure/TreasuryTransfers.Infrastructure.csproj src/TreasuryTransfers.Infrastructure/
 COPY src/TreasuryTransfers.Api/TreasuryTransfers.Api.csproj src/TreasuryTransfers.Api/
+COPY tests/TreasuryTransfers.Tests/TreasuryTransfers.Tests.csproj tests/TreasuryTransfers.Tests/
 
 RUN dotnet restore
 

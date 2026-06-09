@@ -9,9 +9,17 @@ public static class TransfersEndpoints
     {
         app.MapPost("/transfers", async (TransferRequest request, ILedgerTransactionService service) =>
         {
-            var response = await service.TransferAsync(request);
-            
-            return Results.Created($"/transfers/{response.Id}", response);
+            var result = await service.TransferAsync(request);
+
+            return result.IsNew
+                ? Results.Created($"/transfers/{result.Response.Id}", result.Response)
+                : Results.Ok(result.Response);
+        });
+
+        app.MapGet("/transfers", async (ILedgerTransactionService service) =>
+        {
+            var transactions = await service.GetAllAsync();
+            return Results.Ok(transactions);
         });
 
         return app;

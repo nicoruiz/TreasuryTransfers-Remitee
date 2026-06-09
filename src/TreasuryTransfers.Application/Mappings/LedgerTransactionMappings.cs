@@ -10,7 +10,7 @@ public static class LedgerTransactionMappings
         return new TransferResponse(
             entity.Id,
             entity.OperationId,
-            entity.Status.ToString(),
+            entity.Status.ToString().ToUpperInvariant(),
             entity.SourceAccountId,
             entity.TargetAccountId,
             entity.AmountDebited,

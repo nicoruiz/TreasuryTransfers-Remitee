@@ -29,4 +29,9 @@ public class LedgerTransactionRepository : ILedgerTransactionRepository
     {
         await _dbContext.SaveChangesAsync();
     }
+
+    public async Task<IReadOnlyList<LedgerTransaction>> GetAllAsync()
+    {
+        return await _dbContext.LedgerTransactions.ToListAsync();
+    }
 }

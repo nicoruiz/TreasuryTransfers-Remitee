@@ -15,7 +15,7 @@ public static class DependencyInjection
         services.AddDbContext<AppDbContext>(options =>
             options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
 
-        services.AddScoped<IRepository<Account>, AccountsRepository>();
+        services.AddSingleton<IRepository<Account>, AccountsRepository>(); // Se usa singleton para mantener el mismo contexto de cuentas en memoria
         services.AddScoped<ILedgerTransactionRepository, LedgerTransactionRepository>();
 
         return services;

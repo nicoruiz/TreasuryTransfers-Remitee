@@ -6,7 +6,6 @@
 **/out
 **/node_modules
 **/.idea
-**/tests
 **/*.md
 **/.gitkeep
 **/.gitignore
