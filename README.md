@@ -70,7 +70,7 @@ Las dependencias fluyen hacia adentro: **Api → Application → Domain ← Infr
 
 - **Domain**: Contiene las entidades (`Account`, `LedgerTransaction`), value objects (`Currency` con sus reglas de decimales y redondeo), enums y excepciones de negocio. No tiene dependencias externas.
 - **Application**: Orquesta la lógica de negocio. Define interfaces (`IRepository`, `IAccountService`, `ILedgerTransactionRepository`) que Infrastructure implementa. Contiene los validadores, servicios y mappings a DTOs.
-- **Infrastructure**: Implementa la persistencia. `AccountsRepository` mantiene las cuentas en memoria (según la consigna). `LedgerTransactionRepository` persiste las transacciones en PostgreSQL vía EF Core.
+- **Infrastructure**: Implementa la persistencia. `AccountRepository` mantiene las cuentas en memoria (según la consigna). `LedgerTransactionRepository` persiste las transacciones en PostgreSQL vía EF Core.
 - **Api**: Capa de entrada. Minimal APIs para los endpoints, middleware de manejo de excepciones que mapea errores de dominio a HTTP status codes.
 - **Tests**: Tests unitarios con xUnit. Los repositorios se testean con EF Core InMemory para evitar dependencias externas.
 
