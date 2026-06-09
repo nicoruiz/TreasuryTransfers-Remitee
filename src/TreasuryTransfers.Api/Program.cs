@@ -7,10 +7,6 @@ using TreasuryTransfers.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Railway sets PORT env var — configure Kestrel to listen on it
-var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
-builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
-
 // Add services to the container
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
