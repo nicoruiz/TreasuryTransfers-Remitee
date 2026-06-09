@@ -10,7 +10,7 @@ public class AccountServiceTests
 
     public AccountServiceTests()
     {
-        _sut = new AccountService(new AccountsRepository());
+        _sut = new AccountService(new AccountRepository());
     }
 
     #region GetByIdOrThrowAsync

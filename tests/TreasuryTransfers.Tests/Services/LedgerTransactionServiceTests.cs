@@ -21,7 +21,7 @@ public class LedgerTransactionServiceTests : IDisposable
 
         _dbContext = new AppDbContext(options);
         var ledgerRepo = new LedgerTransactionRepository(_dbContext);
-        _accountService = new AccountService(new AccountsRepository());
+        _accountService = new AccountService(new AccountRepository());
         _sut = new LedgerTransactionService(ledgerRepo, _accountService);
     }
 
